@@ -1,0 +1,935 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Подсистема 'Каршеринг'",
+        "contact": {
+            "email": "carsh-app@example.com"
+        },
+        "version": "3.0"
+    },
+    "servers": [
+        {
+            "url": "http://192.168.0.35:80",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/api/cars": {
+            "get": {
+                "tags": [
+                    "Машины"
+                ],
+                "summary": "Вернуть полный список с информацией по машинам",
+                "description": "Display a listing of the resource.",
+                "operationId": "/api/cars(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает полный список с информацией по машинам"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Машины"
+                ],
+                "summary": "Добавить новое поле с информацией по машине",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "/api/cars(POST)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Добавляет новое поле с информацией по машине"
+                    }
+                }
+            }
+        },
+        "/api/cars/23": {
+            "get": {
+                "tags": [
+                    "Машины"
+                ],
+                "summary": "Вернуть поле с информацией по конкретной машине",
+                "description": "Display the specified resource.",
+                "operationId": "/api/cars/{cars}(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает поле с информацией по конкретной машине"
+                    }
+                }
+            }
+        },
+        "/api/cars/22": {
+            "put": {
+                "tags": [
+                    "Машины"
+                ],
+                "summary": "Редактировать поле с информацией по конкретной машине",
+                "description": "Update the specified resource in storage.",
+                "operationId": "/api/cars/{cars}(PUT)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Редактирует поле с информацией по конкретной машине"
+                    }
+                }
+            }
+        },
+        "/api/cars/26": {
+            "delete": {
+                "tags": [
+                    "Машины"
+                ],
+                "summary": "Удалить поле с информацией по конкретной машине",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "/api/cars/{cars}(DELETE)",
+                "responses": {
+                    "200": {
+                        "description": "Удаляет поле с информацией по конкретной машине"
+                    }
+                }
+            }
+        },
+        "/api/dvstype": {
+            "get": {
+                "tags": [
+                    "Типы бензина"
+                ],
+                "summary": "Получение списка типов бензина",
+                "description": "Display a listing of the resource.",
+                "operationId": "/api/dvstype(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список типов бензина"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Типы бензина"
+                ],
+                "summary": "Добавить новый тип бензина",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "/api/dvstype(POST)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsDvsTypesStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Добавляет новый тип бензина"
+                    }
+                }
+            }
+        },
+        "/api/dvstype/2": {
+            "get": {
+                "tags": [
+                    "Типы бензина"
+                ],
+                "summary": "Вернуть поле с информацией по конкретному типу бензина",
+                "description": "Display the specified resource.",
+                "operationId": "/api/dvstype/{dvstype}(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает поле с информацией по конкретному типу бензина"
+                    }
+                }
+            }
+        },
+        "/api/dvstype/5": {
+            "put": {
+                "tags": [
+                    "Типы бензина"
+                ],
+                "summary": "Редактировать поле с информацией по конкретному типу бензина",
+                "description": "Update the specified resource in storage.",
+                "operationId": "/api/dvstype/{dvstype}(PUT)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsDvsTypesStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Редактирует поле с информацией по конкретному типу бензина"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Типы бензина"
+                ],
+                "summary": "Удалить поле с информацией по конкретному типу бензина",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "/api/dvstype/{dvstype}(DELETE)",
+                "responses": {
+                    "200": {
+                        "description": "Удаляет поле с информацией по конкретному типу бензина"
+                    }
+                }
+            }
+        },
+        "/api/carsmarks": {
+            "get": {
+                "tags": [
+                    "Марки машин"
+                ],
+                "summary": "Получение списка марок машин",
+                "description": "Display a listing of the resource.",
+                "operationId": "/api/carsmarks(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список марок машин"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Марки машин"
+                ],
+                "summary": "Добавить новую марку машины",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "/api/carsmarks(POST)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsMarksStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Добавляет новую марку машины"
+                    }
+                }
+            }
+        },
+        "/api/carsmarks/2": {
+            "get": {
+                "tags": [
+                    "Марки машин"
+                ],
+                "summary": "Вернуть конкретную марку машины",
+                "description": "Display the specified resource.",
+                "operationId": "/api/carsmarks/{carsmarks}(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает поле с информацией по конкретной марки машины"
+                    }
+                }
+            }
+        },
+        "/api/carsmarks/5": {
+            "put": {
+                "tags": [
+                    "Марки машин"
+                ],
+                "summary": "Редактировать поле с информацией по конкретной марки машины",
+                "description": "Update the specified resource in storage.",
+                "operationId": "/api/carsmarks/{carsmarks}(PUT)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsMarksStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Редактирует поле с информацией по конкретной марки машины"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Марки машин"
+                ],
+                "summary": "Удалить поле с информацией по конкретной марки машины",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "/api/carsmarks/{carsmarks}(DELETE)",
+                "responses": {
+                    "200": {
+                        "description": "Удаляет поле с информацией по конкретной марки машины"
+                    }
+                }
+            }
+        },
+        "/api/carsmodels": {
+            "get": {
+                "tags": [
+                    "Модели машин"
+                ],
+                "summary": "Получение списка моделей машин",
+                "description": "Display a listing of the resource.",
+                "operationId": "/api/carsmodels(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список моделей машин"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Модели машин"
+                ],
+                "summary": "Добавить модель машины",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "/api/carsmodels(POST)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsModelsStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Добавление новой модели машиной"
+                    }
+                }
+            }
+        },
+        "/api/carsmodels/2": {
+            "get": {
+                "tags": [
+                    "Модели машин"
+                ],
+                "summary": "Вернуть конкретную модель машины",
+                "description": "Display the specified resource.",
+                "operationId": "/api/carsmodels/{carsmodels}(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает конкретную модель машины"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Модели машин"
+                ],
+                "summary": "Редактировать конкретную модель машины",
+                "description": "Update the specified resource in storage.",
+                "operationId": "/api/carsmodels/{carsmodels}(PUT)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsModelsStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Редактирует конкретную модель машины"
+                    }
+                }
+            }
+        },
+        "/api/carsmodels/4": {
+            "delete": {
+                "tags": [
+                    "Модели машин"
+                ],
+                "summary": "Удаляет конкретную модель машины",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "/api/carsmodels/{carsmodels}(DELETE)",
+                "responses": {
+                    "200": {
+                        "description": "Удаление конкретной модели машины"
+                    }
+                }
+            }
+        },
+        "/api/carsoperations": {
+            "get": {
+                "tags": [
+                    "Операции с машинами"
+                ],
+                "summary": "Получение списка операций по машинам",
+                "description": "Display a listing of the resource.",
+                "operationId": "/api/carsoperations(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список операций по машинам"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Операции с машинами"
+                ],
+                "summary": "Добавить операцию с машиной",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "/api/carsoperations(POST)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsOperationsStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Создание новой операции с машиной"
+                    }
+                }
+            }
+        },
+        "/api/carsoperations/2": {
+            "get": {
+                "tags": [
+                    "Операции с машинами"
+                ],
+                "summary": "Вернуть конкретную операцию с машиной",
+                "description": "Display the specified resource.",
+                "operationId": "/api/carsoperations/{carsoperations}(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает конкретную операцию с машиной"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Операции с машинами"
+                ],
+                "summary": "Редактировать конкретную операцию с машиной",
+                "description": "Update the specified resource in storage.",
+                "operationId": "/api/carsoperations/{carsoperations}(PUT)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsOperationsStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Редактирует конкретную операцию с машиной"
+                    }
+                }
+            }
+        },
+        "/api/carsoperations/4": {
+            "delete": {
+                "tags": [
+                    "Операции с машинами"
+                ],
+                "summary": "Удаляет конкретную операцию машиной",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "/api/carsoperations/{carsoperations}(DELETE)",
+                "responses": {
+                    "200": {
+                        "description": "Удаление конкретной операции с машиной"
+                    }
+                }
+            }
+        },
+        "/api/carsstatuses": {
+            "get": {
+                "tags": [
+                    "Статусы машин"
+                ],
+                "summary": "Вывести список статусов машин",
+                "description": "Display a listing of the resource.",
+                "operationId": "/api/carsstatuses(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список статусов машин"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Статусы машин"
+                ],
+                "summary": "Добавить новый статус машины",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "/api/carsstatuses(POST)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsStatusesStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Создает новый статус машины"
+                    }
+                }
+            }
+        },
+        "/api/carsstatuses/1": {
+            "get": {
+                "tags": [
+                    "Статусы машин"
+                ],
+                "summary": "Вернуть статус конкретной машины",
+                "description": "Display the specified resource.",
+                "operationId": "/api/carsstatuses/{carsstatuses}(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает статус конкретного пользователя"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Статусы машин"
+                ],
+                "summary": "Редактировать статус машины",
+                "description": "Update the specified resource in storage.",
+                "operationId": "/api/carsstatuses/{carsstatuses}(PUT)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarsStatusesStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Редактирует статус конкретной машины"
+                    }
+                }
+            }
+        },
+        "/api/carsstatuses/3": {
+            "delete": {
+                "tags": [
+                    "Статусы машин"
+                ],
+                "summary": "Удалить статус машины",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "/api/carsstatuses/{carsstatuses}(DELETE)",
+                "responses": {
+                    "200": {
+                        "description": "Удаляет статус машины"
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Юзеры"
+                ],
+                "summary": "Вывести список пользователей",
+                "description": "Display a listing of the resource.",
+                "operationId": "/api/users(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список пользователей"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Юзеры"
+                ],
+                "summary": "Добавить нового пользователя",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "/api/users(POST)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UsersStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Создает нового пользователя"
+                    }
+                }
+            }
+        },
+        "/api/users/2": {
+            "get": {
+                "tags": [
+                    "Юзеры"
+                ],
+                "summary": "Вернуть конкретного пользователя",
+                "description": "Display the specified resource.",
+                "operationId": "/api/users/{users}(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает конкретного пользователя"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Юзеры"
+                ],
+                "summary": "Редактировать конкретного пользователя",
+                "description": "Update the specified resource in storage.",
+                "operationId": "/api/users/{users}(PUT)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UsersStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Редактирует конкретного пользователя"
+                    }
+                }
+            }
+        },
+        "/api/users/7": {
+            "delete": {
+                "tags": [
+                    "Юзеры"
+                ],
+                "summary": "Удалить конкретного пользователя",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "/api/users/{users}(DELETE)",
+                "responses": {
+                    "200": {
+                        "description": "Удаляет пользователя"
+                    }
+                }
+            }
+        },
+        "/api/usersstatuses": {
+            "get": {
+                "tags": [
+                    "Статусы юзеров"
+                ],
+                "summary": "Возвращает статус пользователя",
+                "operationId": "/api/usersstatuses(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список статусов пользователей"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Статусы юзеров"
+                ],
+                "summary": "Добавить новый статус пользователя",
+                "description": "Display a listing of the resource.",
+                "operationId": "/api/usersstatuses(POST)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UsersStatusesStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Создает новый статус пользователя"
+                    }
+                }
+            }
+        },
+        "/api/usersstatuses/3": {
+            "get": {
+                "tags": [
+                    "Статусы юзеров"
+                ],
+                "summary": "Вернуть статус конкретного пользователя",
+                "description": "Display a listing of the resource.",
+                "operationId": "/api/usersstatuses/{userstatuses}(GET)",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает статус конкретного пользователя"
+                    }
+                }
+            }
+        },
+        "/api/usersstatuses/{usersstatuses}": {
+            "put": {
+                "tags": [
+                    "Статусы юзеров"
+                ],
+                "summary": "Редактировать статус пользователя",
+                "description": "Update the specified resource in storage.",
+                "operationId": "/api/usersstatuses/{userstatuses}(PUT)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UsersStatusesStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Редактирует статус конкретного пользователя"
+                    }
+                }
+            }
+        },
+        "/api/usersstatuses/9": {
+            "delete": {
+                "tags": [
+                    "Статусы юзеров"
+                ],
+                "summary": "Удалить статус пользователя",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "/api/usersstatuses/{usersstatuses}(DELETE)",
+                "responses": {
+                    "200": {
+                        "description": "Удаляет статус пользователя"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CarsDvsTypesStoreRequest": {
+                "required": [
+                    "car_dvs_types"
+                ],
+                "properties": {
+                    "dvs_type": {
+                        "description": "тестовый тип двигателя машины",
+                        "type": "string",
+                        "example": "гидрогелевый"
+                    }
+                },
+                "type": "object"
+            },
+            "CarsMarksStoreRequest": {
+                "required": [
+                    "cars_marks"
+                ],
+                "properties": {
+                    "car_mark": {
+                        "description": "марка машины",
+                        "type": "string",
+                        "example": "mazda"
+                    }
+                },
+                "type": "object"
+            },
+            "CarsModelsStoreRequest": {
+                "required": [
+                    "car_model"
+                ],
+                "properties": {
+                    "car_model": {
+                        "description": "тестовая модель машины",
+                        "type": "string",
+                        "example": "test model"
+                    },
+                    "cars_mark_id": {
+                        "description": "id марки машины",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "CarsOperationsStoreRequest": {
+                "required": [
+                    "car_operations"
+                ],
+                "properties": {
+                    "cars_id": {
+                        "description": "id машины",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "users_id": {
+                        "description": "id юзера",
+                        "type": "integer",
+                        "example": "2"
+                    },
+                    "cars_status_id": {
+                        "description": "id статуса машины",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "data_time_operation": {
+                        "description": "дата и время опреации",
+                        "type": "string",
+                        "format": "date",
+                        "example": "12.01.2023"
+                    },
+                    "GPS_cars_latitude": {
+                        "description": "gps широта",
+                        "type": "numeric",
+                        "example": "32434.12333"
+                    },
+                    "GPS_cars_longitude": {
+                        "description": "gps долгота",
+                        "type": "numeric",
+                        "example": "45434.72333"
+                    }
+                },
+                "type": "object"
+            },
+            "CarsStatusesStoreRequest": {
+                "required": [
+                    "car_status"
+                ],
+                "properties": {
+                    "car_status": {
+                        "description": "тестовый статус машины",
+                        "type": "string",
+                        "example": "test"
+                    }
+                },
+                "type": "object"
+            },
+            "CarsStoreRequest": {
+                "required": [
+                    "cars"
+                ],
+                "properties": {
+                    "cars_models_id": {
+                        "description": "id модели машины",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "car_number": {
+                        "description": "номер машины",
+                        "type": "string",
+                        "example": "к123не"
+                    },
+                    "car_year": {
+                        "description": "год выпуска машины",
+                        "type": "integer",
+                        "example": "2019"
+                    },
+                    "cars_dvs_type_id": {
+                        "description": "тип двигателя",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "cars_status_id": {
+                        "description": "id ",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "UsersStatusesStoreRequest": {
+                "properties": {
+                    "user_status": {
+                        "description": "тестовый статус юзера",
+                        "type": "string",
+                        "example": "test user"
+                    }
+                },
+                "type": "object"
+            },
+            "UsersStoreRequest": {
+                "required": [
+                    "users"
+                ],
+                "properties": {
+                    "last_name": {
+                        "description": "фамилия",
+                        "type": "string",
+                        "example": "Егоров"
+                    },
+                    "first_name": {
+                        "description": "имя",
+                        "type": "string",
+                        "example": "Олег"
+                    },
+                    "middle_name": {
+                        "description": "отчество",
+                        "type": "string",
+                        "example": "Олегович"
+                    },
+                    "phone_number": {
+                        "description": "номер тел",
+                        "type": "integer",
+                        "example": "89228124012"
+                    },
+                    "passport_series": {
+                        "description": "серия паспорта",
+                        "type": "integer",
+                        "example": "5612"
+                    },
+                    "passport_num": {
+                        "description": "номер паспорта",
+                        "type": "integer",
+                        "example": "123412"
+                    },
+                    "users_status_id": {
+                        "description": "id статуса юзера",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
