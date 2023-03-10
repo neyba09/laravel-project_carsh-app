@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('last_name');
             $table->string('first_name');
             $table->string('middle_name');
@@ -22,11 +22,9 @@ return new class extends Migration
             $table->unsignedInteger('passport_series');
             $table->unsignedInteger('passport_num');
             $table->foreignId('users_status_id')
-                ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

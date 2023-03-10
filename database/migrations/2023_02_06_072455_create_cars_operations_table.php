@@ -14,17 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cars_operations', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignId('cars_id')
-                ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('users_id')
-                ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('cars_status_id')
-                ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->dateTime('data_time_operation');

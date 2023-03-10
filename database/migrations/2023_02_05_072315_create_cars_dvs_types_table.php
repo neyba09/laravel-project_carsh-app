@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cars_dvs_types', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('dvs_type');
             $table->timestamps();
         });

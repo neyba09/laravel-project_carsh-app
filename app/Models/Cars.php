@@ -10,16 +10,16 @@ class Cars extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $guarded = false;
+    // protected $guarded = false;
     protected $table = 'cars';
-    // protected $fillable = [
-    //     'id',
-    //     'cars_models_id',
-    //     'car_number',
-    //     'car_year',
-    //     'cars_dvs_type_id',
-    //     'cars_status_id'
-    // ];
+    protected $fillable = [
+        'id',
+        'cars_models_id',
+        'car_number',
+        'car_year',
+        'cars_dvs_type_id',
+        'cars_status_id'
+    ];
 
     public function cars_dvs_type() 
     {

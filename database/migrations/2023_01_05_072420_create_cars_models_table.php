@@ -14,10 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cars_models', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('car_model');
             $table->foreignId('cars_mark_id')
-                ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();
