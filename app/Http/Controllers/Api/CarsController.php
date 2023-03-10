@@ -9,6 +9,7 @@ use App\Http\Resources\Cars as ResourcesCars;
 use App\Http\Requests\CarsStoreRequest;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class CarsController extends Controller
 {
@@ -148,6 +149,6 @@ class CarsController extends Controller
     public function destroy(Cars $car)
     {
         $car->delete();
-        return response(null, 200);
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

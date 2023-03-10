@@ -9,6 +9,7 @@ use App\Models\Cars_dvs_type;
 use App\Http\Resources\CarsDvsTypes;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class CarsDvsTypesController extends Controller
 {
@@ -148,6 +149,6 @@ class CarsDvsTypesController extends Controller
     public function destroy(Cars_dvs_type $dvstype)
     {
         $dvstype->delete();
-        return response(null, 200);
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

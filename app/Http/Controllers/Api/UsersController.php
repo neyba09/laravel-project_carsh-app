@@ -10,6 +10,7 @@ use App\Models\Users;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class UsersController extends Controller
@@ -148,6 +149,6 @@ class UsersController extends Controller
     public function destroy(Users $user)
     {
         $user->delete();
-        return response(null, 200);
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
