@@ -9,6 +9,8 @@ use App\Http\Resources\CarsOperations as ResourcesCarsOperations;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Jobs\CarsOperationsJob;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class CarsOperationsController extends Controller
 {
@@ -30,7 +32,16 @@ class CarsOperationsController extends Controller
      */
     public function index()
     {
-        return ResourcesCarsOperations::collection(Cars_operations::all());
+
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = ResourcesCarsOperations::collection(Cars_operations::all());
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**
@@ -79,7 +90,15 @@ class CarsOperationsController extends Controller
      */
     public function show(Cars_operations $carsoperation)
     {
-        return new ResourcesCarsOperations($carsoperation);
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = new ResourcesCarsOperations($carsoperation);
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**

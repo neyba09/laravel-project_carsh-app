@@ -7,8 +7,8 @@ use App\Http\Requests\CarsDvsTypesStoreRequest;
 use Illuminate\Http\Request;
 use App\Models\Cars_dvs_type;
 use App\Http\Resources\CarsDvsTypes;
-
-
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class CarsDvsTypesController extends Controller
 {
@@ -28,9 +28,17 @@ class CarsDvsTypesController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function index()
+   public function index()
     {
-        return CarsDvsTypes::collection(Cars_dvs_type::all());
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = CarsDvsTypes::collection(Cars_dvs_type::all());
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**
@@ -80,7 +88,15 @@ class CarsDvsTypesController extends Controller
      */
     public function show(Cars_dvs_type $dvstype)
     {
-        return new CarsDvsTypes($dvstype);
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = new CarsDvsTypes($dvstype);
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**

@@ -8,6 +8,8 @@ use App\Http\Requests\CarsMarksStoreRequest;
 use App\Http\Resources\CarsMarks as ResourcesCarsMarks;
 use App\Models\Cars_mark;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class CarsMarksController extends Controller
 {
@@ -29,7 +31,15 @@ class CarsMarksController extends Controller
      */
     public function index()
     {
-        return ResourcesCarsMarks::collection(Cars_mark::all());
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = ResourcesCarsMarks::collection(Cars_mark::all());
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**
@@ -79,7 +89,15 @@ class CarsMarksController extends Controller
      */
     public function show(Cars_mark $carsmark)
     {
-        return new ResourcesCarsMarks($carsmark);
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = new ResourcesCarsMarks($carsmark);
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**

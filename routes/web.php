@@ -33,3 +33,6 @@ Route::get('/', function () {return view('welcome');});
 // Route::get('/cars_operations', [CarsOperationsController::class, 'index']);
 // Route::post('/cars_operations', [CarsOperationsController::class, 'store']);
 // Route::get('/test', [CarsController::class, 'test']);
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

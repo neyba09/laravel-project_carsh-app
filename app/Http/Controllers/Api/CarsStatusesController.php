@@ -8,7 +8,8 @@ use App\Http\Resources\CarsStatuses;
 use App\Models\Cars_status;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class CarsStatusesController extends Controller
 {
@@ -31,7 +32,15 @@ class CarsStatusesController extends Controller
 
     public function index()
     {
-        return CarsStatuses::collection(Cars_status::all());
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = CarsStatuses::collection(Cars_status::all());
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**
@@ -80,7 +89,16 @@ class CarsStatusesController extends Controller
      */
     public function show(Cars_status $carsstatus)
     {
-        return new CarsStatuses($carsstatus);
+
+        $cache = Cache::get(Route::current()->uri); 
+
+        if ($cache) {
+            return $cache;
+        }
+         
+        $cache = new CarsStatuses($carsstatus);
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**

@@ -9,6 +9,8 @@ use App\Http\Resources\UsersStatuses as ResourcesUsersStatuses;
 use App\Models\Users_status;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class UsersStatusesController extends Controller
 {
@@ -29,7 +31,15 @@ class UsersStatusesController extends Controller
      */
     public function index()
     {
-        return ResourcesUsersStatuses::collection(Users_status::all());
+        $cache = Cache::get(Route::current()->uri);
+        
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = ResourcesUsersStatuses::collection(Users_status::all());
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache; 
     }
 
     /**
@@ -81,7 +91,15 @@ public function store(UsersStatusesStoreRequest $request)
      */
     public function show(Users_status $usersstatus)
     {
-        return new ResourcesUsersStatuses($usersstatus);
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = new ResourcesUsersStatuses($usersstatus);
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**

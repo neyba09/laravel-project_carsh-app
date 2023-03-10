@@ -8,6 +8,8 @@ use App\Http\Resources\CarsModels as ResourcesCarsModels;
 use Illuminate\Http\Request;
 use App\Models\Cars_models;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class CarsModelsController extends Controller
 {
@@ -29,7 +31,15 @@ class CarsModelsController extends Controller
      */
     public function index()
     {
-        return ResourcesCarsModels::collection(Cars_Models::all());
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = ResourcesCarsModels::collection(Cars_Models::all());
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**
@@ -80,7 +90,15 @@ class CarsModelsController extends Controller
      */
     public function show(Cars_models $carsmodel)
     {
-        return new ResourcesCarsModels($carsmodel);
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = new ResourcesCarsModels($carsmodel);
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**

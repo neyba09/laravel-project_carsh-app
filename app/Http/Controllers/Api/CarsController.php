@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Cars;
 use App\Http\Resources\Cars as ResourcesCars;
 use App\Http\Requests\CarsStoreRequest;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class CarsController extends Controller
 {
@@ -28,7 +30,15 @@ class CarsController extends Controller
      */
     public function index()
     {
-        return ResourcesCars::collection(Cars::all());
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = ResourcesCars::collection(Cars::all());
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**
@@ -79,7 +89,15 @@ class CarsController extends Controller
      */
     public function show(Cars $car)
     {
-        return new ResourcesCars($car);
+        $cache = Cache::get(Route::current()->uri);
+
+        if($cache) {
+            return $cache;
+        }
+
+        $cache = new ResourcesCars($car);
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**

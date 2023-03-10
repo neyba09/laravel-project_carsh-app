@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('dvs_type');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

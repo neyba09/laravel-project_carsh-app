@@ -18,7 +18,6 @@ class Cars_operations extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
-        'id',
         'cars_id',
         'users_id',
         'cars_status_id',

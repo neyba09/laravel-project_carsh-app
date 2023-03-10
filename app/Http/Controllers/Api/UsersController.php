@@ -7,6 +7,10 @@ use App\Http\Requests\UsersStoreRequest;
 use App\Http\Resources\Users as ResourcesUsers;
 use Illuminate\Http\Request;
 use App\Models\Users;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
+
 
 class UsersController extends Controller
 {
@@ -28,7 +32,15 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return ResourcesUsers::collection(Users::all());
+        $cache = Cache::get(Route::current()->uri); 
+
+        if ($cache) {
+            return $cache;
+        }       
+        $cache = ResourcesUsers::collection(Users::all());
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
+        
     }
 
     /**
@@ -77,7 +89,15 @@ class UsersController extends Controller
      */
     public function show(Users $user)
     {
-        return new ResourcesUsers($user);
+        $cache = Cache::get(Route::current()->uri); 
+
+        if ($cache) {
+            return $cache;
+        }
+         
+        $cache = new ResourcesUsers($user);
+        Cache::put(Route::current()->uri, $cache, now()->addMinutes(300));
+        return $cache;
     }
 
     /**
