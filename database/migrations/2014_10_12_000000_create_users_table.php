@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('phone_number');
             $table->unsignedInteger('passport_series');
             $table->unsignedInteger('passport_num');
-            $table->foreignId('users_status_id')
+            $table->foreignUuid('users_status_id')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

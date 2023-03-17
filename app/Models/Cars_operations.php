@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Cars_operations extends Model
 {
@@ -15,6 +16,8 @@ class Cars_operations extends Model
      */
     
     protected $table = 'cars_operations';
+
+    use HasUuids;
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
@@ -24,6 +27,9 @@ class Cars_operations extends Model
         'data_time_operation',
         'GPS_cars_latitude',
         'GPS_cars_longitude',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     public function cars() {

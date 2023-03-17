@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
                 $table->uuid('id')->primary();
-                $table->foreignId('cars_models_id')
+                $table->foreignUuid('cars_models_id')
                     ->cascadeOnDelete()
                     ->cascadeOnUpdate();
                 $table->string('car_number');
                 $table->unsignedInteger('car_year');
-                $table->foreignId('cars_dvs_type_id')
+                $table->foreignUuid('cars_dvs_type_id')
                     ->cascadeOnDelete()
                     ->cascadeOnUpdate();
-                $table->foreignId('cars_status_id')
+                $table->foreignUuid('cars_status_id')
                     ->cascadeOnDelete()
                     ->cascadeOnUpdate();
                 $table->timestamps();

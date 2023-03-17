@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('cars_models', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('car_model');
-            $table->foreignId('cars_mark_id')
+            $table->foreignUuid('cars_mark_id')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

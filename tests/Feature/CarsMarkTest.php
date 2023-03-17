@@ -5,9 +5,17 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Database\Seeders\Cars_markSeeder;
 
 class CarsMarkTest extends TestCase
 {
+    // use RefreshDatabase;
+
+    // public function testCarsMarkSeederCreated()
+    // {
+    //     $this->seed(Cars_markSeeder::class);
+    // }
+
     // public function testCarsMarkIndex()
     // {
     //     $response = $this->get('/api/carsmarks');

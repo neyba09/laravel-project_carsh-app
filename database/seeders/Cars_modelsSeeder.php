@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Cars_modelsSeeder extends Seeder
 {
@@ -15,17 +16,25 @@ class Cars_modelsSeeder extends Seeder
      */
     public function run()
     {
+        $brands = DB::table('cars_marks')->pluck('id');
         $models = 
         [
-            1 => ['Nexia', 'Matiz'],
-            2 => ['Almera'],
-            3 => ['RIO'],
-            4 => ['Land Cruiser', 'RAV4'],
+            ['Nexia', 'Matiz'],
+            ['Almera'],
+            ['RIO'],
+            ['Land Cruiser', 'RAV4'],
         ];
-        foreach ($models as $key => $model) {
+
+        $i = 0;
+        foreach($brands as $brand) {
+            $car_models[$brand] = $models[$i++];
+        }
+
+        foreach ($car_models as $key => $model) {
             
             foreach ($model as $item) {
                 DB::table('cars_models')->insert([
+                    'id'=>Str::uuid(),
                     'car_model' => $item,
                     'cars_mark_id' => $key,
                     'created_at' => now(),

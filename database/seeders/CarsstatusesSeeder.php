@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CarsstatusesSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class CarsstatusesSeeder extends Seeder
     
             foreach ($statuses as $status) {
                 DB::table('cars_statuses')->insert([
+                    'id'=>Str::uuid(),
                     'car_status' => $status,
                     'created_at' => now(),
                     'updated_at' => now(),

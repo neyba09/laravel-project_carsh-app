@@ -5,9 +5,16 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Database\Seeders\UserSeeder;
 
 class UsersTest extends TestCase
 {
+    // use RefreshDatabase;
+
+    // public function testUsersSeederCreated()
+    // {
+    //     $this->seed(UserSeeder::class);
+    // }
     // public function testUsersIndex()
     // {
     //     $response = $this->get('/api/users');

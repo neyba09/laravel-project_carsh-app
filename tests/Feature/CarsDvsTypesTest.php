@@ -5,69 +5,77 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Database\Seeders\Cars_dvs_typesSeeder;
 
 class CarsDvsTypesTest extends TestCase
 {
-    // public function testDvsTypeIndex()
-    // {
-    //     $response = $this->get('/api/dvstype');
-
-    //     $response->assertStatus(200);
-
-    //     $response->assertJsonStructure([
-    //             'data' => [
-    //                 '*' => [
-    //                      'id',
-    //                      'dvs_type'
-    //                 ]
-    //             ]
-    //         ]);
-    // }
+    use RefreshDatabase;
     
-    // public function testDvsTypeStore()
+    public function testDvsTypesSeederCreated()
+    {
+        $this->seed(Cars_dvs_typesSeeder::class);
+    }
 
-    // {
-    //     $response = $this->postJson('/api/dvstype', ['dvs_type' => 'Кислородный']);
-    //     $response
-    //         ->assertStatus(201)
-    //         ->assertJsonStructure([
-    //             'data' => [
-    //                  'id',
-    //                  'dvs_type'
-    //             ]
-    //         ]);
-    // }
+    public function testDvsTypeIndex()
+    {
+        $response = $this->get('/api/dvstype');
 
-    // public function testDvsTypeShow()
-    // {
-    //     $response = $this->get('/api/dvstype/4');
-    //     $response->assertStatus(200)
-    //             ->assertJsonPath('data.dvs_type', 'ГАЗ')
-    //             ->assertJsonStructure([
-    //                 'data' => [
-    //                     'id',
-    //                     'dvs_type'
-    //                 ]
-    //     ]);
-    // }
+        $response->assertStatus(200);
 
-    // public function testDvsTypeUpdate()
+        $response->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                         'id',
+                         'dvs_type'
+                    ]
+                ]
+            ]);
+    }
+    
+    public function testDvsTypeStore()
 
-    // {
-    //     $response = $this->put('/api/dvstype/7', ['dvs_type' => 'Кислородный']);
-    //     $response
-    //         ->assertStatus(200)
-    //         ->assertJsonStructure([
-    //             'data' => [
-    //                  'id',
-    //                  'dvs_type'
-    //             ]
-    //             ]);
-    // }
+    {
+        $response = $this->postJson('/api/dvstype', ['dvs_type' => 'Кислородный']);
+        $response
+            ->assertStatus(201)
+            ->assertJsonStructure([
+                'data' => [
+                     'id',
+                     'dvs_type'
+                ]
+            ]);
+    }
 
-    // public function testDvsTypeDelete()
-    // {
-    //     $response = $this->delete('/api/dvstype/9');
-    //     $response->assertStatus(204);
-    // }
+    public function testDvsTypeShow()
+    {
+        $response = $this->get('/api/dvstype/1');
+        $response->assertStatus(200)
+                ->assertJsonPath('data.dvs_type', 'ГАЗ')
+                ->assertJsonStructure([
+                    'data' => [
+                        'id',
+                        'dvs_type'
+                    ]
+        ]);
+    }
+
+    public function testDvsTypeUpdate()
+
+    {
+        $response = $this->put('/api/dvstype/1', ['dvs_type' => 'Кислородный']);
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'data' => [
+                     'id',
+                     'dvs_type'
+                ]
+                ]);
+    }
+
+    public function testDvsTypeDelete()
+    {
+        $response = $this->delete('/api/dvstype/1');
+        $response->assertStatus(204);
+    }
 }

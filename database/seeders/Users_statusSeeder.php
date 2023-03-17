@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Users_status;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Users_statusSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class Users_statusSeeder extends Seeder
         
                 foreach ($statuses as $status) {
                     DB::table('users_statuses')->insert([
+                        'id'=>Str::uuid(),
                         'user_status' => $status,
                         'created_at' => now(),
                         'updated_at' => now(),
