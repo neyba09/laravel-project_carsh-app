@@ -9,6 +9,7 @@ use App\Http\Resources\CarsOperations as ResourcesCarsOperations;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Jobs\CarsOperationsJob;
+use Doctrine\DBAL\Types\JsonType;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +70,7 @@ class CarsOperationsController extends Controller
     public function store(CarsOperationsStoreRequest $request)
     {
         dispatch(new CarsOperationsJob($request->validated()));
+        return response(null, 201);
     }
 
     /**

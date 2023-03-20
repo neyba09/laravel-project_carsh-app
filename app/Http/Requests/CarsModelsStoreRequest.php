@@ -33,7 +33,7 @@ class CarsModelsStoreRequest extends FormRequest
     {
         return [
             'car_model'=>'required|string',
-            'cars_mark_id'=>'required|integer'
+            'cars_mark_id'=>'required|uuid'
         ];
     }
 }

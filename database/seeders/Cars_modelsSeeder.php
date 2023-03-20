@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Http\Resources\CarsMarks;
+use App\Models\Cars_mark;
+use App\Models\Cars_models;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +19,8 @@ class Cars_modelsSeeder extends Seeder
      */
     public function run()
     {
-        $brands = DB::table('cars_marks')->pluck('id');
+        $brands = Cars_mark::pluck('id');
+        // $brands = DB::table('cars_marks')->pluck('id');
         $models = 
         [
             ['Nexia', 'Matiz'],
@@ -26,21 +30,21 @@ class Cars_modelsSeeder extends Seeder
         ];
 
         $i = 0;
+        $car_models=[];
         foreach($brands as $brand) {
-            $car_models[$brand] = $models[$i++];
-        }
+            $car_models[$brand] = $models[$i++];}
 
         foreach ($car_models as $key => $model) {
-            
             foreach ($model as $item) {
                 DB::table('cars_models')->insert([
                     'id'=>Str::uuid(),
                     'car_model' => $item,
                     'cars_mark_id' => $key,
-                    'created_at' => now(),
+                    'created_at'=>now()
                 ]);
             }
         }
+        
     }
 }
         

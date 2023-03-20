@@ -2,27 +2,22 @@
 
 namespace Tests\Feature;
 
+use App\Models\Cars_dvs_type;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Database\Seeders\Cars_dvs_typesSeeder;
 
 class CarsDvsTypesTest extends TestCase
-{
-    use RefreshDatabase;
-    
-    public function testDvsTypesSeederCreated()
-    {
-        $this->seed(Cars_dvs_typesSeeder::class);
-    }
+{   
 
     public function testDvsTypeIndex()
     {
+        $this->seed(Cars_dvs_typesSeeder::class);
         $response = $this->get('/api/dvstype');
 
-        $response->assertStatus(200);
-
-        $response->assertJsonStructure([
+        $response->assertStatus(200)
+                 ->assertJsonStructure([
                 'data' => [
                     '*' => [
                          'id',
@@ -35,6 +30,7 @@ class CarsDvsTypesTest extends TestCase
     public function testDvsTypeStore()
 
     {
+        $this->seed(Cars_dvs_typesSeeder::class);
         $response = $this->postJson('/api/dvstype', ['dvs_type' => 'Кислородный']);
         $response
             ->assertStatus(201)
@@ -48,9 +44,10 @@ class CarsDvsTypesTest extends TestCase
 
     public function testDvsTypeShow()
     {
-        $response = $this->get('/api/dvstype/1');
+        $this->seed(Cars_dvs_typesSeeder::class);
+        $dvstypeuuid = Cars_dvs_type::inRandomOrder()->first()->id;
+        $response = $this->get('/api/dvstype/'.$dvstypeuuid);
         $response->assertStatus(200)
-                ->assertJsonPath('data.dvs_type', 'ГАЗ')
                 ->assertJsonStructure([
                     'data' => [
                         'id',
@@ -62,7 +59,9 @@ class CarsDvsTypesTest extends TestCase
     public function testDvsTypeUpdate()
 
     {
-        $response = $this->put('/api/dvstype/1', ['dvs_type' => 'Кислородный']);
+        $this->seed(Cars_dvs_typesSeeder::class);
+        $dvstypeuuid = Cars_dvs_type::inRandomOrder()->first()->id;
+        $response = $this->putJson('/api/dvstype/'.$dvstypeuuid, ['dvs_type' => 'Кислородный']);
         $response
             ->assertStatus(200)
             ->assertJsonStructure([
@@ -75,7 +74,9 @@ class CarsDvsTypesTest extends TestCase
 
     public function testDvsTypeDelete()
     {
-        $response = $this->delete('/api/dvstype/1');
+        $this->seed(Cars_dvs_typesSeeder::class);
+        $dvstypeuuid = Cars_dvs_type::inRandomOrder()->first()->id;
+        $response = $this->delete('/api/dvstype/'.$dvstypeuuid);
         $response->assertStatus(204);
     }
 }

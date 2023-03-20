@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Cars_status;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -9,73 +10,65 @@ use Database\Seeders\CarsstatusesSeeder;
 
 class CarsStatusesTest extends TestCase
 {
-    // use RefreshDatabase;
+   public function testCarsStatusesIndex()
+    {
+        $response = $this->get('/api/carsstatuses');
 
-    // public function testCarsStatusesSeederCreated()
-    // {
-    //     $this->seed(CarsstatusesSeeder::class);
-    // }
+        $response->assertStatus(200);
 
-    // public function testCarsStatusesIndex()
-    // {
-    //     $response = $this->get('/api/carsstatuses');
-
-    //     $response->assertStatus(200);
-
-    //     $response->assertJsonStructure([
-    //             'data' => [
-    //                 '*' => [
-    //                      'id',
-    //                      'car_status'
-    //                 ]
-    //             ]
-    //         ]);
-    // }
+        $response->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                         'id',
+                         'car_status'
+                    ]
+                ]
+            ]);
+    }
     
-    // public function testCarsStatusesStore()
+    public function testCarsStatusesStore()
 
-    // {
-    //     $response = $this->postJson('/api/carsstatuses', ['car_status' => 'Sally']);
-    //     $response
-    //         ->assertStatus(201)
-    //         ->assertJsonStructure([
-    //             'data' => [
-    //                  'id',
-    //                  'car_status'
-    //             ]
-    //             ]);
-    // }
+    {
+        $response = $this->postJson('/api/carsstatuses', ['car_status' => 'Исчез']);
+        $response
+            ->assertStatus(201)
+            ->assertJsonStructure([
+                'data' => [
+                     'id',
+                     'car_status'
+                ]
+                ]);
+    }
 
-    // public function testCarsStatusesShow()
-    // {
-    //     $response = $this->get('/api/carsstatuses/12');
-    //     $response->assertStatus(200)
-    //             ->assertJsonPath('data.car_status', 'Уехала')
-    //             ->assertJsonStructure([
-    //                 'data' => [
-    //                     'id',
-    //                     'car_status'
-    //                 ]
-    //     ]);
-    // }
+    public function testCarsStatusesShow()
+    {
+        $response = $this->get('/api/carsstatuses/'.Cars_status::inRandomOrder()->first()->id);
+        $response->assertStatus(200)
+                 ->assertJsonStructure([
+                    'data' => [
+                        'id',
+                        'car_status'
+                    ]
+        ]);
+    }
 
-    // public function testCarsStatusesUpdate()
+    public function testCarsStatusesUpdate()
 
-    // {
-    //     $response = $this->put('/api/carsstatuses/12', ['car_status' => 'Уехала']);
-    //     $response
-    //         ->assertStatus(200)
-    //         ->assertJsonStructure([
-    //             'data' => [
-    //                  'id',
-    //                  'car_status'
-    //             ]
-    //             ]);
-    // }
+    {
+        $response = $this->put('/api/carsstatuses/'.Cars_status::inRandomOrder()->first()->id, ['car_status' => 'Уехала']);
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'data' => [
+                     'id',
+                     'car_status'
+                ]
+                ]);
+    }
 
-    // public function testCarsStatusesDelete()
-    // {
-    //     $response = $this->delete('/api/carsstatuses/17');
-    //     $response->assertStatus(204);
-    // }
+    public function testCarsStatusesDelete()
+    {
+        $response = $this->delete('/api/carsstatuses/'.Cars_status::inRandomOrder()->first()->id);
+        $response->assertStatus(204);
+    }
 }

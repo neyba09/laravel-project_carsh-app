@@ -36,11 +36,11 @@ class CarsStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'cars_models_id'=>'required|integer',
+            'cars_models_id'=>'required|uuid',
             'car_number'=>'required|string',
             'car_year'=>'required|integer',
-            'cars_dvs_type_id'=>'required|integer',
-            'cars_status_id'=>'required|integer'
+            'cars_dvs_type_id'=>'required|uuid',
+            'cars_status_id'=>'required|uuid'
         ];
     }
 }

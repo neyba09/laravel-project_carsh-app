@@ -36,9 +36,9 @@ class CarsOperationsStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'cars_id'=>'required|integer',
-            'users_id'=>'required|integer',
-            'cars_status_id'=>'required|integer',
+            'cars_id'=>'required|uuid',
+            'users_id'=>'required|uuid',
+            'cars_status_id'=>'required|uuid',
             'data_time_operation'=>'required|date',
             'GPS_cars_latitude'=>'required|numeric',
             'GPS_cars_longitude'=>'required|numeric',

@@ -44,7 +44,7 @@ class UsersStoreRequest extends FormRequest
             'phone_number'=> 'required|integer',
             'passport_series'=> 'required|integer',
             'passport_num'=> 'required|integer',
-            'users_status_id'=> 'required|integer'
+            'users_status_id'=> 'required|uuid'
         ];
     }
 }

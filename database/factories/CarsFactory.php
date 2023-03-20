@@ -26,7 +26,7 @@ class CarsFactory extends Factory
         $Strings = 'abcdefghijklmnopqrstuvwxyz';
         return [
             'id'=>Str::uuid(),
-            'cars_models_id' => Cars_models::inRandomOrder()->first(),
+            'cars_models_id' => Cars_models::inRandomOrder()->first()->id,
             'car_number' => substr(str_shuffle($Strings), 0, 1).rand(100,999).substr(str_shuffle($Strings), 0, 2),
             'car_year' => rand(1999,2023),
             'cars_dvs_type_id' => Cars_dvs_type::inRandomOrder()->first(),
